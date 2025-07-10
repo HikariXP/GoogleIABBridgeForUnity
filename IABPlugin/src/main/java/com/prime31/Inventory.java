@@ -52,13 +52,7 @@ public class Inventory {
     public JSONArray getAllProductAsJson() {
         try {
             JSONArray json = new JSONArray();
-
-            Log.i("Bababoi", "All Products count is  " + mProductDetailMap.size());
-
             for (ProductDetails details : this.mProductDetailMap.values()) {
-                Log.i("Debug", "ProductDetails toString: " + details.toString());
-
-
                 Matcher matcher = Pattern.compile("(?<=parsedJson=)(.+?)(?=,\\sproductId=)").matcher(details.toString());
                 Log.i("Prime31", "getAllProductAsJson Ori:" + details);
                 if (matcher.find()) {

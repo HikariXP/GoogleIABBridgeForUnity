@@ -124,27 +124,21 @@ public class GoogleIABPlugin extends GoogleIABPluginBase {
         {
             // 8.0.0
             List<ProductDetails> productDetailsList = productDetailsResult.getProductDetailsList();
-            Log.i("Bababoi", "------------------- onProductDetailsResponse. total product details: " + productDetailsList.size());
 
             for (ProductDetails productDetails : productDetailsList) {
                 Log.i("Bababoi", "ProductDetails toString: " + productDetails.toString());
                 this.inventory.addProductDetails(productDetails);
             }
         } else {
-            Log.i("Prime31", "queryProductFailed failed: " + billingResult.getDebugMessage());
+            Log.i("Bababoi", "queryProductFailed failed: " + billingResult.getDebugMessage());
             UnitySendMessage("queryProductFailed", String.valueOf(billingResult.getResponseCode()));
         }
 
         this.queryProductResponseCount--;
-        Log.i("Bababoi", "queryProductResponseCount:" + this.queryProductResponseCount);
 
         if (this.queryProductResponseCount == 0) {
-            Log.i("Bababoi", "Start Transfrom productDetail to json:");
             String productJson = this.inventory.getAllProductAsJson().toString();
-            Log.i("Prime31", "queryProductSucceeded: " + productJson);
             UnitySendMessage("queryProductSucceeded", productJson);
-        }else {
-            Log.i("Bababoi", "Start Transfrom productDetail to json:");
         }
     };
 
